@@ -42,11 +42,11 @@ publishing {
     publications {
         create<MavenPublication>("GitHubPackages") {
             groupId = "io.github.benjishults"
-            artifactId = "app-config"
+            artifactId = "functional-errors"
             from(components["java"])
             pom {
-                name = "BPS App Config"
-                description = "Makes it easy to configure an application from YAML files."
+                name = "BPS Functional Errors"
+                description = "Help errors without non-local exits."
                 url = "https://github.com/benjishults/bps-kotlin"
                 licenses {
                     license {
@@ -60,15 +60,6 @@ publishing {
 }
 
 dependencies {
-
-    // TODO see how many of these I can get rid of
-    implementation(libs.konf)
-    implementation(libs.jackson.jsr310)
-    implementation(libs.jackson.jdk8)
-    implementation(libs.jackson.yaml)
-    implementation(libs.jackson.kotlin) {
-        exclude(group = "org.jetbrains.kotlin")
-    }
 
     testImplementation(libs.mockk.jvm)
     testImplementation(libs.kotest.junit5)
