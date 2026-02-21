@@ -27,18 +27,18 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
       - name: Run Dokka
-        run: ./gradlew :lib:dokkaGenerate :test:dokkaGenerate
+        run: ./gradlew :app-config:dokkaGenerate :functional-errors:dokkaGenerate
       - name: Generate tar file
         run: |
           echo ::group::prepare files for archival
           mkdir "$RUNNER_TEMP/docs"
           mkdir "$RUNNER_TEMP/docs/dokka"
           mkdir "$RUNNER_TEMP/docs/dokka/html"
-          mkdir "$RUNNER_TEMP/docs/dokka/html/test"
-          mkdir "$RUNNER_TEMP/docs/dokka/html/lib"
+          mkdir "$RUNNER_TEMP/docs/dokka/html/app-config"
+          mkdir "$RUNNER_TEMP/docs/dokka/html/functional-errors"
           cp ./docs/pages/* "$RUNNER_TEMP/docs"
-          cp -R ./test/build/dokka/html/* "$RUNNER_TEMP/docs/dokka/html/test"
-          cp -R ./lib/build/dokka/html/* "$RUNNER_TEMP/docs/dokka/html/lib"
+          cp -R ./app-config/build/dokka/html/* "$RUNNER_TEMP/docs/dokka/html/app-config"
+          cp -R ./functional-errors/build/dokka/html/* "$RUNNER_TEMP/docs/dokka/html/functional-errors"
           echo ::endgroup::
           echo ::group::archive html files
           tar --directory "$RUNNER_TEMP/docs" -cvf "$RUNNER_TEMP/artifact.tar" .
